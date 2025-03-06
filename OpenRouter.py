@@ -61,15 +61,6 @@ class OpenRouter(loader.Module):
                 lambda: "Модель AI для использования. Пример: deepseek/deepseek-chat, openai/gpt-3.5-turbo",
                 validator=loader.validators.String()
             ),
-            loader.ConfigValue(
-                "answer_text",
-                """[👤](tg://emoji?id=5879770735999717115) **Вопрос:** {question}
-
-[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}
-
-<b>Модель:</b> <code>{model}</code>""",
-                lambda: "Текст вывода",
-            ),
         )
         self.executor = ThreadPoolExecutor()
 
@@ -101,24 +92,25 @@ class OpenRouter(loader.Module):
                 lambda: client.chat.completions.create(
                     model=self.config['model'],
                     messages=[{"role": "user", "content": q}],
-                    stream=True,  
+                    stream=True,
                 )
             )
 
             answer = ""
-            last_answer = ""  
+            last_answer = ""
             for chunk in response:
                 if chunk.choices[0].delta.content:
                     answer += chunk.choices[0].delta.content
 
+                    # Проверяем, изменился ли ответ
                     if answer != last_answer:
                         try:
-                            await m.edit(self.config['answer_text'].format(
-                                question=q,
-                                answer=answer,
-                                model=self.config['model']
-                            ), parse_mode="markdown")
-                            last_answer = answer  # Обновляем последний успешно отправленный ответ
+                            await m.edit(
+                                f"[👤](tg://emoji?id=5879770735999717115) **Вопрос:** {q}\n\n"
+                                f"[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}\n\n"
+                                parse_mode="markdown"
+                            )
+                            last_answer = answer
                         except Exception as e:
                             logger.warning(f"Ошибка при редактировании сообщения: {e}")
 
@@ -129,10 +121,10 @@ class OpenRouter(loader.Module):
 
         if answer != last_answer:
             try:
-                await m.edit(self.config['answer_text'].format(
-                    question=q,
-                    answer=answer,
-                    model=self.config['model']
-                ), parse_mode="markdown")
+                await m.edit(
+                    f"[👤](tg://emoji?id=5879770735999717115) **Вопрос:** {q}\n\n"
+                    f"[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}\n\n"
+                    parse_mode="markdown"
+                )
             except Exception as e:
                 logger.warning(f"Ошибка при финальном редактировании сообщения: {e}")
