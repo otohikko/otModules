@@ -29,7 +29,7 @@ from telethon.tl.functions.account import UpdateProfileRequest
 
 @loader.tds
 class TimeInNameMod(loader.Module):
-    """Модуль для обновления имени в формате 'имя|время <emoji document_id=5854929766146118183>❌</emoji>'"""
+    """Модуль для обновления имени в формате 'имя|время'"""
     strings = {"name": "TimeInName"}
 
     def __init__(self):
