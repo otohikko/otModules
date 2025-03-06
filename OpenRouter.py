@@ -107,7 +107,7 @@ class OpenRouter(loader.Module):
                         try:
                             await m.edit(
                                 f"[👤](tg://emoji?id=5879770735999717115) **Вопрос:** {q}\n\n"
-                                f"[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}\n\n"
+                                f"[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}\n\n",
                                 parse_mode="markdown"
                             )
                             last_answer = answer
@@ -123,7 +123,7 @@ class OpenRouter(loader.Module):
             try:
                 await m.edit(
                     f"[👤](tg://emoji?id=5879770735999717115) **Вопрос:** {q}\n\n"
-                    f"[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}\n\n"
+                    f"[🤖](tg://emoji?id=5372981976804366741) **Ответ:** {answer}\n\n",
                     parse_mode="markdown"
                 )
             except Exception as e:
