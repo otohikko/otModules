@@ -39,10 +39,10 @@ class OpenRouter(loader.Module):
     """Взаимодействие с различными моделями AI через OpenRouter"""
 
     strings = {
-        "name": "DeepSeek",
+        "name": "OpenRouter",
 
         "no_args": "<emoji document_id=5854929766146118183>❌</emoji> <b>Нужно </b><code>{}{} {}</code>",
-        "no_token": "<emoji document_id=5854929766146118183>❌</emoji> <b>Нету токена! Вставь его в </b><code>{}cfg deepseek</code>",
+        "no_token": "<emoji document_id=5854929766146118183>❌</emoji> <b>Нету токена! Вставь его в </b><code>{}cfg openrouter</code>",
 
         "asking_model": "<emoji document_id=5332518162195816960>🔄</emoji> <b>Спрашиваю {}...</b>",
     }
