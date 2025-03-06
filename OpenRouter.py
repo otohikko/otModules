@@ -78,8 +78,13 @@ class OpenRouter(loader.Module):
             ),
             loader.ConfigValue(
                 "stream_output",
-                True,
-                "Включить потоковый вывод ответа (по чанкам).",
+                False,
+                (
+                    "Включить потоковый вывод ответа (по чанкам). "
+                    
+                    "Внимание: Для пользователей без Telegram Premium это может "
+                    "привести к блокировке за слишком частые запросы."
+                ),
                 validator=loader.validators.Boolean(),
             ),
         )
@@ -96,7 +101,7 @@ class OpenRouter(loader.Module):
         if not q:
             return await utils.answer(
                 message,
-                self.strings["no_args"].format(self.get_prefix(), "deepseek", "[вопрос]"),
+                self.strings["no_args"].format(self.get_prefix(), "ask", "[вопрос]"),
             )
 
         if not self.config["api_key"]:
