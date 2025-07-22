@@ -46,7 +46,7 @@ class Video2Audio(loader.Module):
 
     async def client_ready(self):
         self.v2a = await self.import_lib(
-            "https://libs.hikariatama.ru/v2a.py",
+            "https://raw.githubusercontent.com/otohikko/otModules/main/v2a.py",
             suspend_on_error=True,
         )
 
